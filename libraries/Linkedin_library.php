@@ -11,17 +11,46 @@
 
 class Linkedin_library
 {
-	function __construct()
+	protected $ci;
+	protected $consumer;
+	protected $linkedin;
+	protected $tokens;
+
+	function __construct($config)
 	{
 		// Global CodeIgniter instance
 		$this->ci =& get_instance();
 
+		// Load Library
+		$this->ci->load->library('oauth');
+		$this->ci->load->library('curl');
+
+        // Create Consumer
+        $this->consumer = $this->ci->oauth->consumer(array(
+            'key' 	 	=> config_item('linkedin_consumer_key'),
+            'secret' 	=> config_item('linkedin_consumer_secret')
+        ));
+
+        // Load Provider
+        $this->linkedin = $this->ci->oauth->provider('linkedin');
+
+        // Create Tokens
+		$this->tokens = OAuth_Token::forge('request', array(
+			'access_token' 	=> $config->auth_one,
+			'secret' 		=> $config->auth_two
+		));
+
+		// Merge Object Tokens & Data
+		$this->request_array = array_merge(array(
+			'oauth_consumer_key' 	=> $this->consumer->key,
+			'oauth_token' 			=> $config->auth_one
+		));	
 	}
 	
 	/* Interact with Data_Model */
-	function my_custom_method($data_id)
+	function get_full_profile($user_id)
 	{
-		return $this->ci->linkedin_model->get_data($data_id);
+		return $this->linkedin->get_full_profile($this->consumer, $this->tokens, $this->request_array, $user_id);	
 	}
 
 }

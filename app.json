@@ -1,0 +1,12 @@
+{
+	"app":"linkedin",
+	"name":"LinkedIn",
+	"created":"2012-12-15",
+	"updated":"2012-12-15",
+	"creator":"Brennan Novak",
+	"category":"social",
+	"links":{
+		"default":"settings/linkedin"
+	},
+	"launcher":"yes"	
+}

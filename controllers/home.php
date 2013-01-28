@@ -1,7 +1,7 @@
 <?php  if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 /**
 * Name:			Social Igniter : LinkedIn : Home Controller
-* Author: 		Localhost
+* Author: 		Brennan Novak
 * 		  		hi@brennannovak.com
 * 
 * Project:		http://social-igniter.com
@@ -18,11 +18,5 @@ class Home extends Dashboard_Controller
 
 		$this->data['page_title'] = 'LinkedIn';
 	}
-	
-	function custom()
-	{
-		$this->data['sub_title'] = 'Custom';
-	
-		$this->render();
-	}
+
 }

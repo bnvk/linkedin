@@ -39,6 +39,20 @@
 	<?= base_url() ?> <input type="text" size="30" name="connections_redirect" value="<?= $settings['linkedin']['connections_redirect'] ?>" />
 	</p>
 
+</div>
+
+<span class="item_separator"></span>
+
+<div class="content_wrap_inner">
+
+	<h3>Show Profile</h3>
+	<p>User must connect their LinkedIn account)<br>
+	<select name="profile_user_id">
+	<?php foreach ($this->social_auth->get_users('active', 1) as $user): ?>
+		<option value="<?= $user->user_id ?>" <?php if ($user->user_id == config_item('linkedin_profile_user_id')) echo 'selected'; ?>><?= $user->name ?></option>
+	<?php endforeach; ?>
+	</select>
+
 	<input type="hidden" name="module" value="<?= $this_module ?>">
 
 	<p><input type="submit" name="save" value="Save" /></p>
